@@ -33,7 +33,8 @@ export default defineConfig({
         ],
         output: {
             assetFileNames: (assetInfo) => {
-                if (assetInfo.name === 'style.css') return 'index.css'
+                console.log(assetInfo, 36)
+                if (assetInfo?.names?.includes('style.css')) return 'index.css'
                 return  assetInfo.name  as string
             },
             manualChunks: (id) => {
