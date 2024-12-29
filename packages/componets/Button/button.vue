@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import {throttle} from "lodash-es"
+import { ref, computed, inject } from "vue";
+import { throttle } from "lodash-es";
+import { BUTTON_GROUP_CONTEXT_KEY } from "./constant";
 
-import { PlIcon } from 'play-element'
+import { PlIcon } from "play-element";
 
-import type { ButtonProps, ButtonEmits , ButtonInstance} from "./types";
-
+import type { ButtonProps, ButtonEmits, ButtonInstance } from "./types";
 
 defineOptions({
   name: "PlButton",
@@ -15,30 +15,35 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   tag: "button",
   nativeType: "button",
   useThrottle: true,
-  throttleDuration: 500
+  throttleDuration: 500,
 });
 const iconStyle = computed(() => ({
   marginRight: slots.default ? "6px" : "0px",
 }));
 
 const slots = defineSlots();
+const ctx  = inject(BUTTON_GROUP_CONTEXT_KEY, void 0)
 const _ref = ref<HTMLButtonElement>();
-const emits = defineEmits<ButtonEmits>()
+const size = computed(() => ctx?.size ?? props.size ?? void 0)
+const type = computed(() => ctx?.type ?? props.type ?? void 0)
+const disabled = computed(() => ctx?.disabled ||  props.disabled || false)
+
+const emits = defineEmits<ButtonEmits>();
 
 const handleclickAdapter = (e: MouseEvent) => {
   if (props.useThrottle) {
-    handleBtnClickThrottle(e)
+    handleBtnClickThrottle(e);
   } else {
-    handleBtnClick(e)
+    handleBtnClick(e);
   }
-}
+};
 
-const handleBtnClick = (e: MouseEvent) => emits('click', e)
+const handleBtnClick = (e: MouseEvent) => emits("click", e);
 
 /**
- * @description throttle 
+ * @description throttle
  */
- const handleBtnClickThrottle = throttle(handleBtnClick, props.throttleDuration)
+const handleBtnClickThrottle = throttle(handleBtnClick, props.throttleDuration);
 
 defineExpose<ButtonInstance>({
   ref: _ref,
@@ -51,7 +56,7 @@ defineExpose<ButtonInstance>({
     ref="_ref"
     class="er-button"
     :autofocus="autofocus"
-    :disabed="disabled || loading ? true : void 0"
+    :disabled="disabled || loading ? true : void 0"
     :type="tag === 'button' ? nativeType : void 0"
     :class="{
       [`er-button--${type}`]: type,
@@ -64,7 +69,7 @@ defineExpose<ButtonInstance>({
     }"
     @click="handleclickAdapter"
   >
-  <template v-if="loading">
+    <template v-if="loading">
       <slot name="loading">
         <PlIcon
           class="loading-icon"
@@ -75,16 +80,11 @@ defineExpose<ButtonInstance>({
         />
       </slot>
     </template>
-    <PlIcon
-      :icon="icon"
-      size="1x"
-      :style="iconStyle"
-      v-if="icon && !loading"
-    />
+    <PlIcon :icon="icon" size="1x" :style="iconStyle" v-if="icon && !loading" />
     <slot></slot>
   </component>
 </template>
 
 <style scoped>
-    @import './style.css'
+@import "./style.css";
 </style>
