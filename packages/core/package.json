@@ -1,15 +1,50 @@
 {
   "name": "play-element",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Components library by Vue3 + Ts",
+  "type": "module",
+  "main": "./dist/umd/index.umd.cjs",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/core/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/umd/index.umd.cjs",
+      "types": "./dist/types/core/index.d.ts"
+    },
+    "./dist": {
+      "import": "./dist",
+      "require": "./dist"
+    }
   },
-  "dependencies": {
-    "@play-element/components": "workspace:*"
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "./dist/index.css"
+  ],
+  "scripts": {
+    "build": "run-s build-only move-style",
+    "build-only": "run-p build-es build-umd",
+    "build-es": "vite build --config vite-config-esm.ts",
+    "build-umd": "vite build --config vite-config-umd.ts",
+    "move-style": "move-file dist/esm/index.css dist/index.css"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@popperjs/core": "^2.11.8",
+    "async-validator": "^4.2.5"
+  },
+  "devDependencies": {
+    "vite-plugin-dts": "^4.4.0",
+    "@play-element/components": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.19"
+  }
 }

@@ -1,13 +1,12 @@
-import type {Meta, StoryObj, ArgTypes} from '@storybook/vue3'
+import type { Meta, StoryObj, ArgTypes } from "@storybook/vue3";
 
-import {fn, within, userEvent,expect} from '@storybook/test'
+import { fn, within, userEvent, expect } from "@storybook/test";
 
-import { PlButton, PlButtonGroup } from 'play-element'
+import { PlButton, PlButtonGroup } from "play-element";
 
 type Story = StoryObj<typeof PlButton> & {
-  argTypes?: ArgTypes
-}
-
+  argTypes?: ArgTypes;
+};
 
 const meta: Meta<typeof PlButton> = {
   title: "Example/Button",
@@ -55,7 +54,6 @@ const meta: Meta<typeof PlButton> = {
   },
   args: { onClick: fn() },
 };
-
 
 const container = (val: string) => `
 <div style="margin:5px">
@@ -112,7 +110,7 @@ export const Group: Story & { args: { content1: string; content2: string } } = {
     content2: "Button2",
   },
   render: (args) => ({
-    components: {PlButton, PlButtonGroup },
+    components: { PlButton, PlButtonGroup },
     setup() {
       return { args };
     },
@@ -135,5 +133,4 @@ export const Group: Story & { args: { content1: string; content2: string } } = {
   },
 };
 
-
-export default meta
+export default meta;

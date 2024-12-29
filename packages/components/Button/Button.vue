@@ -3,7 +3,7 @@ import { ref, computed, inject } from "vue";
 import { throttle } from "lodash-es";
 import { BUTTON_GROUP_CONTEXT_KEY } from "./constant";
 
-import { PlIcon } from "play-element";
+import PlIcon  from "../Icon/Icon.vue";
 
 import type { ButtonProps, ButtonEmits, ButtonInstance } from "./types";
 
