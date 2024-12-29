@@ -1,8 +1,8 @@
-import { PlButton, PlButtonGroup, PlIcon } from "@play-element/components";
+import { PlButton, PlButtonGroup } from "@play-element/components";
 import type { Plugin } from "vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 
 library.add(fas)
 
-export default [PlButton, PlButtonGroup, PlIcon] as Plugin[];
+export default [PlButton, PlButtonGroup] as Plugin[];

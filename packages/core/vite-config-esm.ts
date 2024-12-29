@@ -6,7 +6,7 @@ import vue from "@vitejs/plugin-vue";
 const COM_NMAE = [
     "Button",
     "ButtonGroup",
-    "Icon"
+    // "Icon"
 ]
 
 export default defineConfig({
@@ -33,7 +33,6 @@ export default defineConfig({
         ],
         output: {
             assetFileNames: (assetInfo) => {
-                console.log(assetInfo.names, 27)
                 if (assetInfo.name === 'style.css') return 'index.css'
                 return  assetInfo.name  as string
             },
