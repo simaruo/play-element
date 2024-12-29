@@ -2,9 +2,5 @@
 </script>
 
 <template>
- <PlButton />
+ <PlButton size="large" type="primary">button</PlButton>
 </template>
-
-<style scoped>
-
-</style>
