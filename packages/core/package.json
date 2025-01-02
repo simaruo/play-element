@@ -12,9 +12,9 @@
       "require": "./dist/umd/index.umd.cjs",
       "types": "./dist/types/core/index.d.ts"
     },
-    "./dist": {
-      "import": "./dist",
-      "require": "./dist"
+    "./dist/": {
+      "import": "./dist/",
+      "require": "./dist/"
     }
   },
   "files": [
@@ -28,7 +28,9 @@
     "build-only": "run-p build-es build-umd",
     "build-es": "vite build --config vite-config-esm.ts",
     "build-umd": "vite build --config vite-config-umd.ts",
-    "move-style": "move-file dist/esm/index.css dist/index.css"
+    "move-style": "move-file dist/esm/index.css dist/index.css",
+    "clean": "rimraf dist",
+    "release": "release-it"
   },
   "keywords": [],
   "author": "",
